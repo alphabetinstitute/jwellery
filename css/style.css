@@ -1255,3 +1255,8 @@ form input[type="submit"]:focus {
 .owl-theme .owl-dots .owl-dot.active span{
   background: #f7444e !important;
 }
+
+.special_img{
+  border: 1px solid #002C3E30;
+  margin-top: 20px;
+}
