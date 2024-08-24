@@ -1053,7 +1053,7 @@ footer .full, footer .widget_menu{
 }
 
 div.form_sub .field input[type="email"], div.form_sub .field input[type="text"], div.form_sub .field input[type="email"]:hover, div.form_sub .field input[type="email"]:focus {
-    padding: 10px 110px 10px 15px;
+    padding: 10px 30px 10px 15px;
     border-radius: 0;
     border: solid #ccc 1px;
     font-size: 14px;
