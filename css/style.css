@@ -991,7 +991,7 @@ li.nav-item ul li a:hover, li.nav-item ul li a:focus {
 
 footer {
     background: #e2f5fb;
-    padding: 70px 0 70px;
+    padding: 0px 0 0px 0 ;
 }
 footer .full, footer .widget_menu{
   padding-top: 40px;
