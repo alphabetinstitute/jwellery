@@ -154,10 +154,13 @@ a:focus {
 
 .custom_nav-container .navbar-nav {
   margin-left: auto;
+  align-items: center;
 }
 
 .custom_nav-container .navbar-nav .nav-item .nav-link {
-    padding: 5px 20px;
+    font-size: 14px;
+    font-weight: 600 !important;
+    padding: 5px 10px;
     color: #131313;
     text-align: center;
     text-transform: uppercase;
@@ -165,6 +168,10 @@ a:focus {
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
     font-weight: 700;
+}
+.custom_nav-container .navbar-nav-2 .nav-item .nav-link {
+  padding: 5px 10px !important;
+  margin-left: 0 !important;
 }
 
 .custom_nav-container .navbar-nav .nav-item .nav-link svg {
@@ -984,9 +991,11 @@ li.nav-item ul li a:hover, li.nav-item ul li a:focus {
 
 footer {
     background: #e2f5fb;
-    padding: 90px 0 70px;
+    padding: 70px 0 70px;
 }
-
+footer .full, footer .widget_menu{
+  padding-top: 40px;
+}
 .logo_footer {
     margin-bottom: 30px;
 }
@@ -996,13 +1005,16 @@ footer {
     line-height: 25px;
     font-size: 15px;
 }
+.information_f p strong {
+  margin-right: 8px;
+}
 
 .widget_menu h3 {
     font-size: 18px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.2px;
-    margin-bottom: 25px;
+    margin-bottom: 10px;
 }
 
 .widget_menu ul {
@@ -1024,6 +1036,13 @@ footer {
     width: 100%;
     margin-top: 5px;
 }
+.widget_menu ul li a:hover {
+  color: #f7444e;
+  font-weight: 600;
+}
+.widget_menu ul li a i{
+  margin-right: 8px;
+}
 
 .field {
     display: flex;
@@ -1034,7 +1053,7 @@ footer {
     width: 100%;
 }
 
-div.form_sub .field input[type="email"], div.form_sub .field input[type="email"]:hover, div.form_sub .field input[type="email"]:focus {
+div.form_sub .field input[type="email"], div.form_sub .field input[type="text"], div.form_sub .field input[type="email"]:hover, div.form_sub .field input[type="email"]:focus {
     padding: 10px 110px 10px 15px;
     border-radius: 0;
     border: solid #ccc 1px;
@@ -1062,6 +1081,26 @@ div.form_sub .field input[type="email"], div.form_sub .field input[type="email"]
     font-weight: 600;
     margin-bottom: 0;
     padding: 0 15px;
+}
+
+.form_sub .field button {
+  position: absolute;
+  right: 0;
+  background: #f7444e;
+  color: #fff;
+  border: none;
+  border-radius: 0 !important;
+  top: 0px;
+  font-size: 14px;
+  height: 36px;
+  font-weight: 600;
+  margin-bottom: 0;
+  padding: 0 15px;
+}
+.form_sub .field button:hover {
+  background: #0c0c0c;
+  color: #fff;
+  border: none;
 }
 
 form input {
@@ -1143,4 +1182,9 @@ form input[type="submit"]:focus {
 .banner-ade .col-md-6  {
   padding: 0;
   border: 2px solid;
+}
+
+.profile-dropdown-menu{
+  left: auto !important;
+  right: 0 !important;
 }
