@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: #0c0c0c;
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+ul{
+  list-style: none;
+}
+.layout_padding {
+  padding: 70px 0;
+}
+
+.layout_padding2 {
+  padding: 75px 0;
+}
+
+.layout_padding2-top {
+  padding-top: 75px;
+}
+
+.layout_padding2-bottom {
+  padding-bottom: 75px;
+}
+
+.layout_padding-top {
+  padding-top: 90px;
+}
+
+.layout_padding-bottom {
+  padding-bottom: 90px;
+}
+
+h1,
+h2 {
+  font-family: 'Playfair Display', serif;
+}
+
+.heading_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.shop_by_section{
+  width: 100%;
+  height: auto;
+  background: #FFFFFF;
+  border: 1px solid #002C3E30;
+}
+.shop_by_section .shop_by_title{
+  width: 100%;
+  height: auto;
+  background: #F7444E;
+  border: 1px solid #F7444E;
+  padding: 10px;
+}
+.shop_by_section .shop_by_title h4{
+  font-size: 16px;
+  color: #FFFFFF !important;
+  margin-bottom: 0;
+}
+.shop_by_section .shop_by_category{
+  padding: 10px;
+}
+.shop_by_section .shop_by_category h6{
+  border-bottom: 1px solid #002C3E30;
+  padding-bottom: 8px;
+}
+.shop_by_section .shop_by_category ul{
+  height: calc( 100vh - 400px);
+  max-height: calc( 100vh - 400px);
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+}
+.shop_by_section .shop_by_category ul li{
+  padding: 4px 0;
+}
+.shop_by_section .shop_by_category ul li .custom_checkbox input{
+  width: 18px;
+  height: 18px;  
+}
+.shop_by_section .shop_by_category ul li .custom_checkbox label{
+  font-size: 14px;
+  font-weight: 500;
+  padding-left: 4px;
+}
+
+.shop_by_section .shop_by_category ul li{
+  
+}
+.shop_by_section .shop_by_category ul{
+  
+}
+.shop_by_section .shop_by_category ul{
+  
+}
