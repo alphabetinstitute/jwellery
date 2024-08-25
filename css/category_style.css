@@ -72,12 +72,14 @@ h2 {
   color: #FFFFFF !important;
   margin-bottom: 0;
 }
-.shop_by_section .shop_by_category{
+.shop_by_section .shop_by_category, .shop_by_section .shop_by_gram{
   padding: 10px;
-}
-.shop_by_section .shop_by_category h6{
   border-bottom: 1px solid #002C3E30;
-  padding-bottom: 8px;
+}
+.shop_by_section .shop_by_category h6, .shop_by_section .shop_by_gram h6{
+  font-size: 14px;
+  font-weight: 600;
+  padding-bottom: 6px;
 }
 .shop_by_section .shop_by_category ul{
   height: calc( 100vh - 400px);
@@ -99,12 +101,29 @@ h2 {
   padding-left: 4px;
 }
 
-.shop_by_section .shop_by_category ul li{
+.shop_by_section .shop_by_gram{
   
 }
-.shop_by_section .shop_by_category ul{
+.shop_by_section .shop_by_gram .shop_by_gram_range{
+  display: flex;
+  justify-content: space-between;
+}
+.shop_by_section .shop_by_gram .shop_by_gram_range div{
+  width: 47%;
   
 }
-.shop_by_section .shop_by_category ul{
-  
+.shop_by_section .shop_by_gram .shop_by_gram_range label{
+  font-size: 14px;
+  margin-bottom: 0;
 }
+.shop_by_section .shop_by_gram .btn-box{
+  width: 100% !important;
+  margin-top: 0 !important;
+}
+.shop_by_section .shop_by_gram .btn-box a{
+  width: 100% !important;
+  text-align: center;
+}
+
+
+/*--------------------- Product Section -----------------------*/
