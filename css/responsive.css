@@ -3,6 +3,28 @@
 @media (max-width: 1120px) {}
 
 @media (max-width: 992px) {
+  .navbar-collapse ul{
+    align-items: flex-start !important;
+  }
+  .navbar-collapse {
+    padding-top: 60px;
+  }
+  .mobile_search{
+    width: 100%;
+    padding-left: 25px;
+  }
+  .custom_nav-container .navbar-nav-2 .nav-item {
+    padding-left: 25px !important;
+  }
+  .navbar-collapse.show .navbar-nav-2 .dropdown.show .dropdown-toggle{
+    text-align: left;
+  }
+  .navbar-collapse.show .navbar-nav-2 .dropdown-menu{
+    float: left;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 10px;
+  }
   .hero_area {
     min-height: auto;
   }
@@ -34,6 +56,9 @@
 
 @media (max-width: 767px) {
 
+  .arrival_bg_box img{
+    display: none;
+  }
   .slider_bg_box img {
     -o-object-position: top center;
     object-position: top center;
@@ -74,6 +99,16 @@
 @media (max-width: 576px) {
   .heading_container h2 {
     font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 575.9px) {
+  .dd_arrow{
+    display: block;
+  }
+  .mobile_shop_by_section{
+    height: 47px;
+    overflow-y: hidden;
   }
 }
 
