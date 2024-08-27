@@ -1258,3 +1258,8 @@ form input[type="submit"]:focus {
   border: 1px solid #002C3E30;
   margin-top: 20px;
 }
+.banner_bg_color{
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background: #F6F3EF;
+}
