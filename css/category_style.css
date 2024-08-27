@@ -193,3 +193,98 @@ h2 {
   margin: 0;
   padding: 0;
 }
+
+/* ----------------------- New product UI 28-08-2024 ------------------------------ */
+
+.category-container {
+  display: flex;
+  height: calc(100vh - 52px); 
+  overflow: hidden;
+  padding-top: 70px;
+}
+
+.left-menu {
+  width: 30%;
+  background-color: white;
+  border-right: 1px solid #002C3E30;
+  overflow-y: auto;
+}
+
+.left-menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.left-menu li {
+  padding: 15px 20px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+.left-menu li img {
+  width: 25px;
+  margin-right: 10px;
+}
+
+.left-menu li.active {
+  background-color: #e2f5fb;
+  font-weight: bold;
+}
+.left-menu li span{
+  font-size: 14px;
+}
+.left-menu li.active span{
+  color: #0c0c0c;
+}
+.right-content {
+  width: 70%;
+  background-color: white;
+  padding: 10px;
+  overflow-y: auto;
+  animation: fadeIn 0.3s ease;
+}
+
+.category-list {
+  display: none;
+}
+
+.category-list h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.sub-category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.sub-category img {
+  width: 30px;
+  height: 30px;
+  margin-right: 15px;
+}
+
+.sub-list {
+  display: none;
+  padding-left: 40px;
+  background-color: #f9f9f9;
+  margin-bottom: 10px;
+}
+
+.sub-list p {
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+  margin: 0;
+}
+
+.expand {
+  font-size: 18px;
+  cursor: pointer;
+}

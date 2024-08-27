@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Mobile Category Menu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-bar">
+            <h1>All Categories</h1>
+        </div>
+    </header>
+
+    <div class="location-bar">
+        <p>Mumbai 400104</p>
+    </div>
+
+    <div class="category-container">
+        <div class="left-menu">
+            <ul>
+                <li class="active" data-category="groceries">
+                    <img src="groceries-icon.png" alt="Groceries"> Groceries
+                </li>
+                <li data-category="home-lifestyle">
+                    <img src="home-icon.png" alt="Home & Lifestyle"> Home & Lifestyle
+                </li>
+                <li data-category="electronics">
+                    <img src="electronics-icon.png" alt="Electronics"> Electronics
+                </li>
+                <li data-category="fashion">
+                    <img src="fashion-icon.png" alt="Fashion"> Fashion
+                </li>
+                <li data-category="industrial-supplies">
+                    <img src="industrial-icon.png" alt="Industrial"> Industrial & Professional Supplies
+                </li>
+            </ul>
+        </div>
+
+        <div class="right-content">
+            <div class="category-list" id="groceries">
+                <h2>Groceries</h2>
+                <div class="sub-category">
+                    <img src="biscuits-icon.png" alt="Biscuits">
+                    <span>Biscuits, Drinks & Packaged Foods</span>
+                    <span class="expand">+</span>
+                </div>
+                <div class="sub-list">
+                    <p>Snacks</p>
+                    <p>Beverages</p>
+                </div>
+                <div class="sub-category">
+                    <img src="fruits-icon.png" alt="Fruits">
+                    <span>Fruits & Vegetables</span>
+                    <span class="expand">+</span>
+                </div>
+                <div class="sub-list">
+                    <p>Fresh Fruits</p>
+                    <p>Fresh Vegetables</p>
+                </div>
+                <!-- Add more sub-categories here -->
+            </div>
+
+            <!-- Additional categories can be added here like this -->
+            <div class="category-list" id="home-lifestyle" style="display: none;">
+                <h2>Home & Lifestyle</h2>
+                <!-- Subcategories go here -->
+            </div>
+            <div class="category-list" id="electronics" style="display: none;">
+                <h2>Electronics</h2>
+                <!-- Subcategories go here -->
+            </div>
+            <div class="category-list" id="fashion" style="display: none;">
+                <h2>Fashion</h2>
+                <!-- Subcategories go here -->
+            </div>
+            <div class="category-list" id="industrial-supplies" style="display: none;">
+                <h2>Industrial & Professional Supplies</h2>
+                <!-- Subcategories go here -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-menu">
+            <ul>
+                <li>Home</li>
+                <li class="active">Categories</li>
+                <li>Account</li>
+                <li>Notifications</li>
+                <li>Orders</li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // Handle category selection
+        document.querySelectorAll('.left-menu ul li').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.left-menu ul li').forEach(li => li.classList.remove('active'));
+                document.querySelectorAll('.category-list').forEach(list => list.style.display = 'none');
+
+                item.classList.add('active');
+                document.getElementById(item.getAttribute('data-category')).style.display = 'block';
+            });
+        });
+
+        // Handle sub-category expansion
+        document.querySelectorAll('.sub-category .expand').forEach(expand => {
+            expand.addEventListener('click', () => {
+                const sublist = expand.parentElement.nextElementSibling;
+                if (sublist.style.display === 'block') {
+                    sublist.style.display = 'none';
+                    expand.textContent = '+';
+                } else {
+                    sublist.style.display = 'block';
+                    expand.textContent = '-';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

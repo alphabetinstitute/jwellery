@@ -103,6 +103,11 @@
 }
 
 @media (max-width: 575.9px) {
+  .navbar-brand img{
+    width: 100px;
+    padding: 20px;
+    border-radius: 8px;
+  }
   .dd_arrow{
     display: block;
   }
@@ -145,23 +150,20 @@
   .col_shop_by_mobile ul .shop_by_category_li a span{
     font-size: 12px;
   }
-  .col_shop_by_mobile{
-    
-  }
-  .col_shop_by_mobile{
-    
-  }
-  .col_shop_by_mobile{
-    
-  }
   .product_column_mobile{
     width: 70% !important;
   }
-  .product_column_mobile{
-    
+  
+  .category-container .left-menu ul li{
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
   }
-  
-  
+  .category-container .left-menu ul li img{
+    margin-right: 0;
+  }
 }
 
 @media (max-width: 480px) {
