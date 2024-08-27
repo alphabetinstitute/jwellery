@@ -200,14 +200,15 @@ h2 {
   display: flex;
   height: calc(100vh - 52px); 
   overflow: hidden;
-  padding-top: 70px;
+  padding-top: 40px;
 }
 
 .left-menu {
-  width: 30%;
+  width: 20%;
   background-color: white;
   border-right: 1px solid #002C3E30;
   overflow-y: auto;
+  padding-top: 35px;
 }
 
 .left-menu ul {
@@ -240,7 +241,7 @@ h2 {
   color: #0c0c0c;
 }
 .right-content {
-  width: 70%;
+  width: 80%;
   background-color: white;
   padding: 10px;
   overflow-y: auto;
