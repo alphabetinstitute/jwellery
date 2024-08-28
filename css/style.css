@@ -376,7 +376,7 @@ a:focus {
 .product_section .box {
     position: relative;
     margin-bottom: 25px;
-    padding: 35px 35px;
+    padding: 20px;
     background-color: #e2f5fb;
     -webkit-transition: all .3s;
     transition: all .3s;

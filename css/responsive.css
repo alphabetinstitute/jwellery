@@ -164,6 +164,12 @@
   .category-container .left-menu ul li img{
     margin-right: 0;
   }
+  .left-menu{
+    width: 30%;
+  }
+  .right-content{
+    width: 70%;
+  }
 }
 
 @media (max-width: 480px) {
