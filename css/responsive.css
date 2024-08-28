@@ -165,10 +165,10 @@
     margin-right: 0;
   }
   .left-menu{
-    width: 30%;
+    width: 30% !important;
   }
   .right-content{
-    width: 70%;
+    width: 70% !important;
   }
 }
 
