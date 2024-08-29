@@ -1,0 +1,1898 @@
+<?php
+$category = '';
+$custom = '';
+$categoryArr = $db->select("tbl_category", "status = 1"); 
+
+$url = $_SESSION['redirect_url'] = $_SERVER['REQUEST_URI'];
+
+if ($url == '/costom-product.php') {
+    $custom = 2;
+} elseif ($url == '/product.php') {
+    $custom = 1;
+}
+
+if (count($categoryArr) > 0) {
+    $category = '';
+
+    foreach ($categoryArr as $key => $value) {
+        $id = $value['id'];
+        $sub_category = $db->select("tbl_sub_category", "category_id = $id");
+
+        $category .= '<li class="subcategory-item">';
+        $category .= '<a href="category.php?cateid=' . $id . '&costom=' . $custom . '">' . $value['category_name'] . ' <i class="fas fa-angle-down subcategory-link" data-subcategory="subcat' . $id . '" style="float: right;"></i></a>';
+
+        if (count($sub_category) > 0) {
+            $category .= '<ul class="items-nav" id="subcat' . $id . '">';
+            foreach ($sub_category as $key => $value1) {
+                $category .= '<li><a href="category.php?subcateid=' . $value1['id'] . '&costom=' . $custom . '">' . $value1['sub_category_name'] . '</a></li>';
+            }
+            $category .= '</ul>';
+        }
+
+        $category .= '</li>';
+    }
+}
+?>
+
+
+<style type="text/css">
+
+    .submenu {
+
+        display: none;
+
+        position: absolute;
+
+        z-index: 1;
+
+        background-color: #f4f4f4;
+
+        border-radius: 10px;
+
+    }
+
+
+
+    .nav-item:hover .submenu {
+
+        display: block;
+
+    }
+
+
+
+    .submenu li {
+
+        display: block;
+
+    }
+
+
+
+    .submenu a {
+
+        display: block;
+
+        padding: 8px 12px;
+
+        text-decoration: none;
+
+        color: #333;
+
+    }
+
+
+
+    .submenu a:hover {
+
+        background-color: #f4f4f4;
+
+    }
+
+
+
+
+
+    .sub-submenu {
+
+        display: none;
+
+    }
+
+    .navbar-nav li a {font-size:13px; font-weight:600;}
+
+    .navbar-nav li a:hover {border:0 !important;}
+
+    .navbar-nav li a:hover {color:red !important;}
+
+
+
+    header{
+
+        width:100%;
+
+        position: sticky;
+
+        top: 0;
+
+        z-index: 99999;
+
+        /* height: 100px; */
+
+        background: #f7f4e1;
+
+    }
+
+    body{overflow-x:hidden;}
+
+    /*header{position:fixed; top:0; }*/
+
+
+
+    .top-sec-grid {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: flex-end;
+
+    }
+
+     .top-nav-hd{width:100%;}
+
+
+
+    .logo-img-nav{width:70px !important; height:70px !important;}
+
+    .width-100{100%}
+
+    .bottom {
+
+        height: 20%;
+
+        display: grid;
+
+        align-items: center;
+
+    }
+
+
+
+    @media screen and (max-width: 990px) {
+
+        .logo-hd {
+
+            display: none !important;
+
+        }
+
+        .search-sec{display: none !important;}
+
+        .top-sec-grid {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding:10px 0 10px 24px !important;
+
+        }
+
+        .none{display:block !important;}
+
+        .pab{padding:0 !important;}
+
+    
+
+    
+
+    }
+
+
+
+    /*=========2000px================*/
+
+     @media (min-width: 2000px) {
+
+        .navbar-nav li a {
+
+            font-size: 26px; /* Yahan aap jo bhi font size chahte hain, woh set karein */
+
+          }
+
+          .nav-item {
+
+                margin: 0 20px;
+
+        }
+
+        .categories-box h3{font-size:50px !important;}
+
+        .categories-box article{font-size:30px !important;}
+
+        .grams-box h3{font-size:50px !important;}
+
+        .grams-box article{font-size:30px !important;}
+
+        .grams-box .form-control{font-size:30px;}
+
+        .grams-box button{font-size:40px;}
+
+        .top-nav-hd .width-100{width:100%;}
+
+        .top-nav-hd .form-control{font-size:30px !important;}
+
+        .logo-img-nav {
+
+            width: 100px !important;
+
+            height: 100px !important;
+
+        }
+
+        .cart-icon .fs-2{font-size:60px !important;}
+
+        .bottom h6{font-size:26px !important;}
+
+         .bottom p{font-size:22px !important;}
+
+         .bottom .col-3 .fs-1{font-size:60px !important;} 
+
+         /*=======productdetails========================*/
+
+         .product-details-page{max-width:1800px !important;}
+
+         .second-box .details-section h1{font-size:50px !important;}
+
+         .second-box .details-section .fs-13{font-size:26px; font-family: monospace; font-weight:700;}
+
+         .second-box .details-section label{
+
+            /*padding: 60px;*/
+
+            font-size: 30px;
+
+        }
+
+        #decrementBtn1{font-size:40px;}
+
+        #incrementBtn1{font-size:40px;}
+
+       .second-box .w-40{font-size:40px; padding-left:7rem !important;}
+
+       .second-box .btn-outline-danger{font-size:30px;}
+
+       .small-images article img {
+
+        width: 120px;
+
+        height: 120px;
+
+           
+
+       }
+
+    }
+
+     @media (min-width: 2500px) {
+
+        .navbar-nav li a {
+
+            font-size: 30px; /* Yahan aap jo bhi font size chahte hain, woh set karein */
+
+          }
+
+          .nav-item {
+
+                margin: 0 25px;
+
+            }
+
+            .categories-box h3{font-size:55px !important;}
+
+            .categories-box article{font-size:35px !important;}
+
+            .grams-box h3{font-size:55px !important;}
+
+            .grams-box article{font-size:35px !important;}
+
+            .grams-box .form-control{font-size:35px;}
+
+            .grams-box button{font-size:45px;}
+
+            .top-nav-hd .form-control{font-size:35px !important;}
+
+            .logo-img-nav {
+
+                width: 120px !important;
+
+                height: 120px !important;
+
+            }
+
+            .cart-icon .fs-2{font-size:65px !important;}
+
+            .bottom h6{font-size:30px !important;}
+
+             .bottom p{font-size:26px !important;}
+
+             .bottom .col-3 .fs-1{font-size:65px !important;} 
+
+             
+
+             /*=======productdetails========================*/
+
+             .product-details-page{max-width:2400px !important;}
+
+             .second-box .details-section h1{font-size:55px !important;}
+
+             .second-box .details-section .fs-13{font-size:30px; font-family: monospace; font-weight:700;}
+
+             .second-box .details-section label{
+
+                /*padding: 60px;*/
+
+                font-size: 35px;
+
+            }
+
+            #decrementBtn1{font-size:45px;}
+
+            #incrementBtn1{font-size:45px;}
+
+           .second-box .w-40{font-size:45px; padding-left:7rem !important;}
+
+           .second-box .btn-outline-danger{font-size:35px;}
+
+           .small-images article img {
+
+                width: 150px;
+
+                height: 150px;
+
+                   
+
+               }
+
+    }
+
+    @media (min-width: 3000px) {
+
+        .navbar-nav li a {
+
+            font-size: 35px; /* Yahan aap jo bhi font size chahte hain, woh set karein */
+
+          }
+
+          .nav-item {
+
+                margin: 0 30px;
+
+            }
+
+            .categories-box h3{font-size:60px !important;}
+
+            .categories-box article{font-size:40px !important;}
+
+            .grams-box h3{font-size:60px !important;}
+
+            .grams-box article{font-size:40px !important;}
+
+            .grams-box .form-control{font-size:40px;}
+
+            .grams-box button{font-size:50px;}
+
+            .top-nav-hd .form-control{font-size:40px !important;}
+
+            .logo-img-nav {
+
+                width: 140px !important;
+
+                height: 140px !important;
+
+            }
+
+            .cart-icon .fs-2{font-size:70px !important;}
+
+            .bottom h6{font-size:34px !important;}
+
+             .bottom p{font-size:30px !important;}
+
+             .bottom .col-3 .fs-1{font-size:70px !important;} 
+
+             
+
+             /*=======productdetails========================*/
+
+             .product-details-page{max-width:2800px !important;}
+
+             .second-box .details-section h1{font-size:60px !important;}
+
+             .second-box .details-section .fs-13{font-size:35px; font-family: monospace; font-weight:700;}
+
+             .second-box .details-section label{
+
+                /*padding: 60px;*/
+
+                font-size: 40px;
+
+            }
+
+            #decrementBtn1{font-size:50px;}
+
+            #incrementBtn1{font-size:50px;}
+
+           .second-box .w-40{font-size:50px; padding-left:7rem !important;}
+
+           .second-box .btn-outline-danger{font-size:40px;}
+
+           .small-images article img {
+
+                width: 200px;
+
+                height: 200px;
+
+                   
+
+           }
+
+    }
+
+    @media (min-width: 3500px) {
+
+        .navbar-nav li a {
+
+            font-size:40px; /* Yahan aap jo bhi font size chahte hain, woh set karein */
+
+          }
+
+          .nav-item {
+
+                margin: 0 35px;
+
+            }
+
+            .categories-box h3{font-size:65px !important;}
+
+            .categories-box article{font-size:45px !important;}
+
+            .grams-box h3{font-size:65px !important;}
+
+            .grams-box article{font-size:45px !important;}
+
+            .grams-box .form-control{font-size:45px;}
+
+            .grams-box button{font-size:55px;}
+
+            .top-nav-hd .form-control{font-size:45px !important;}
+
+            .logo-img-nav {
+
+                width: 160px !important;
+
+                height: 160px !important;
+
+            }
+
+            .cart-icon .fs-2{font-size:75px !important;}
+
+            .bottom h6{font-size:34px !important;}
+
+             .bottom p{font-size:30px !important;}
+
+             .bottom .col-3 .fs-1{font-size:70px !important;} 
+
+             
+
+             /*=======productdetails========================*/
+
+             .product-details-page{max-width:3300px !important;}
+
+             .second-box .details-section h1{font-size:65px !important;}
+
+             .second-box .details-section .fs-13{font-size:40px; font-family: monospace; font-weight:700;}
+
+             .second-box .details-section label{
+
+                /*padding: 60px;*/
+
+                font-size: 45px;
+
+            }
+
+            #decrementBtn1{font-size:55px;}
+
+            #incrementBtn1{font-size:55px;}
+
+           .second-box .w-40{font-size:55px; padding-left:7rem !important;}
+
+           .second-box .btn-outline-danger{font-size:45px;}
+
+           .small-images article img {
+
+                width: 240px;
+
+                height: 240px;
+
+                   
+
+           }
+
+    }
+
+    @media (min-width: 4000px) {
+
+        .navbar-nav li a {
+
+            font-size:45px; /* Yahan aap jo bhi font size chahte hain, woh set karein */
+
+          }
+
+          .nav-item {
+
+                margin: 0 40px;
+
+            }
+
+            .categories-box h3{font-size:70px !important;}
+
+            .categories-box article{font-size:50px !important;}
+
+            .grams-box h3{font-size:70px !important;}
+
+            .grams-box article{font-size:50px !important;}
+
+            .grams-box .form-control{font-size:50px;}
+
+            .grams-box button{font-size:60px;}
+
+            .top-nav-hd .form-control{font-size:50px !important;}
+
+            .logo-img-nav {
+
+                width: 180px !important;
+
+                height: 180px !important;
+
+            }
+
+            .cart-icon .fs-2{font-size:80px !important;}
+
+            .bottom h6{font-size:37px !important;}
+
+             .bottom p{font-size:30px !important;}
+
+             .bottom .col-3 .fs-1{font-size:75px !important;} 
+
+    }
+
+    @media (min-width: 4000px) {
+
+        .navbar-nav li a {
+
+            font-size:50px; /* Yahan aap jo bhi font size chahte hain, woh set karein */
+
+          }
+
+          .nav-item {
+
+                margin: 0 45px;
+
+            }
+
+            .categories-box h3{font-size:75px !important;}
+
+            .categories-box article{font-size:55px !important;}
+
+            .grams-box h3{font-size:75px !important;}
+
+            .grams-box article{font-size:55px !important;}
+
+            .grams-box .form-control{font-size:55px;}
+
+            .grams-box button{font-size:65px;}
+
+            .top-nav-hd .form-control{font-size:55px !important;}
+
+            .logo-img-nav {
+
+                width: 200px !important;
+
+                height: 200px !important;
+
+            }
+
+    }
+
+
+
+    .cart-count{
+
+        margin-left: -77px;
+
+        margin-top: 36px;
+
+    }
+
+
+
+    @media only screen and (max-width: 989px) {
+
+        .cart-count{
+
+                margin-left: -16px;
+
+                margin-top: 23px;
+
+        }
+
+    }
+</style>
+
+
+
+<!--new burger menu start here style-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+    .burger-main{
+
+        background-color: #f8f9fa !important;
+
+        box-sizing: border-box;
+
+        text-decoration: none;
+
+        list-style: none;
+
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+        overflow-x: hidden;
+
+    }
+
+   
+
+    .container2 {
+
+        max-width: 1200px;
+
+        margin: auto;
+
+    }
+
+
+
+
+
+    .row2 {
+
+        display: flex;
+
+        flex-wrap: wrap;
+
+    }
+
+
+
+    .v-center {
+
+        align-items: center;
+
+    }
+
+
+
+
+
+    .burger-header {
+
+        position: relative;
+
+        width: 100%;
+
+        padding: 15px;
+
+        display: block;
+
+    }
+
+
+
+    .burger-header .item-left {
+
+        flex: 0 0 17%;
+
+    }
+
+
+
+    .burger-header .item-center {
+
+        flex: 0 0 66%;
+
+    }
+
+
+
+    /*.burger-header .item-right {*/
+
+    /*    flex: 0 0 17%;*/
+
+    /*    display: flex;*/
+
+    /*    justify-content: flex-end;*/
+
+    /*}*/
+
+
+
+
+
+    .burger-header .item-right a {
+
+        display: inline-block;
+
+        margin-left: 17px;
+
+        color: black;
+
+        font-size: 15px;
+
+    }
+
+
+
+
+
+    .burger-header .logo a {
+
+        font-size: 25px;
+
+        font-weight: 900;
+
+        color: black;
+
+        text-transform: uppercase;
+
+        font-style: italic;
+
+    }
+
+
+
+
+
+    .burger-header .menu>ul>li {
+
+        display: inline-block;
+
+        margin-left: 20px;
+
+    }
+
+
+
+
+
+
+
+    .burger-header .menu>ul>li>a {
+
+        font-size: 15px;
+
+        color: black;
+
+        position: relative;
+
+        font-weight: 500;
+
+    }
+
+
+
+
+
+    .burger-header .menu>ul>li .sub-menu {
+
+        position: absolute;
+
+        z-index: 500;
+
+        background-color: white;
+
+        box-shadow: -2px 2px 0px 25px white;
+
+        margin-top: 25px;
+
+        padding: 20px 25px;
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        transition: all 0.4s ease;
+
+    }
+
+
+
+    @media (min-width:1000px) {
+
+        .burger-header .menu>ul>li.menu-item-has-children:hover .sub-menu {
+
+            opacity: 1;
+
+            visibility: visible;
+
+        }
+
+    }
+
+
+
+
+
+    .burger-header .menu>ul>li .sub-menu.mega-menu {
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
+    }
+
+
+
+    .burger-header .menu>ul>li .sub-menu.mega-menu-column-4 {
+
+        max-width: 100%;
+
+        width: 100%;
+
+        display: flex;
+
+        flex-wrap: wrap;
+
+    }
+
+
+
+
+
+    .burger-header .menu>ul>li .sub-menu.mega-menu>.list-item {
+
+        flex: 0 0 20%;
+
+        padding: 0px 15px;
+
+    }
+
+
+
+
+
+
+
+    .burger-header .menu>ul>li .sub-menu.mega-menu>.list-item .title {
+
+        font-size: 18.5px;
+
+        text-transform: uppercase;
+
+        letter-spacing: -1px;
+
+        color: rgb(17, 153, 139);
+
+    }
+
+
+
+
+
+    .burger-header .menu>ul>li .sub-menu.mega-menu>.list-item.text-center .title {
+
+        text-align: center;
+
+        margin: 5px 0;
+
+    }
+
+
+
+    .burger-header .menu>ul>li .sub-menu.mega-menu>.list-item>ul>li {
+
+        display: block;
+
+        margin: 0;
+
+        line-height: 30px;
+
+    }
+
+
+
+
+
+    .burger-header .menu>ul>li .sub-menu.mega-menu>.list-item>ul>li>a {
+
+        font-size: 15px;
+
+        color: #555;
+
+    }
+
+
+
+    .burger-header .menu>ul>li .sub-menu.mega-menu>.list-item img {
+
+        max-width: 100%;
+
+        width: 100%;
+
+        height: 100%;
+
+        object-fit: cover;
+
+        vertical-align: middle;
+
+    }
+
+
+
+
+
+    .banner-section {
+
+        display: block;
+
+        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9)), url('https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/190423-institute-sustanable-clothing-1556057761.png');
+
+        background-size: cover;
+
+        width: 100%;
+
+        height: 700px;
+
+    }
+
+
+
+    .mobile-menu-head,
+
+    .mobile-menu-tigger {
+
+        display: none;
+
+    }
+
+
+
+    /*---------------------------media query start here------------------------*/
+
+
+
+    @media (max-width:1000px) {
+
+        .burger-header .item-center {
+
+            order: 3;
+
+            flex: 0 0 100%;
+
+        }
+
+
+
+        .burger-header .item-right,
+
+        .burger-header .item-left {
+
+            flex: 0 0 auto;
+
+        }
+
+
+
+        .v-center {
+
+            justify-content: space-between;
+
+        }
+
+
+
+        .burger-header .mobile-menu-trigger {
+
+            display: flex;
+
+            width: 50px;
+
+            height: 30px;
+
+            margin-left: 15px;
+
+            justify-content: center;
+
+            align-items: center;
+
+            cursor: pointer;
+
+        }
+
+
+
+        .burger-header .mobile-menu-trigger span {
+
+            position: relative;
+
+            display: block;
+
+            width: 24px;
+
+            height: 2px;
+
+            background-color: black;
+
+        }
+
+
+
+        .burger-header .mobile-menu-trigger span:before,
+
+        .burger-header .mobile-menu-trigger span:after {
+
+            content: '';
+
+            position: absolute;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            background-color: black;
+
+        }
+
+
+
+        .burger-header .mobile-menu-trigger span:before {
+
+            top: -6px;
+
+        }
+
+
+
+        .burger-header .mobile-menu-trigger span:after {
+
+            top: 6px;
+
+        }
+
+
+
+        .burger-header .item-right {
+
+            align-items: center;
+
+        }
+
+
+
+        .burger-header .menu {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 320px;
+
+            height: 100%;
+
+            background-color: white;
+
+            z-index: 1099;
+
+            overflow: hidden;
+
+            transform: translate(-100%);
+
+        }
+
+
+
+        .burger-header .menu.active {
+
+            transform: translate(0%);
+
+        }
+
+
+
+        .burger-header .menu>ul>li {
+
+            display: block;
+
+            margin: 0;
+
+            line-height: 1;
+
+        }
+
+
+
+        .burger-header .menu>ul>li>a {
+
+            display: block;
+
+            height: 60px;
+
+            font-size: 17px;
+
+            line-height: 60px;
+
+            border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+
+            padding: 0px 50px 0px 15px;
+
+        }
+
+
+
+        .burger-header .menu>ul>li>a i {
+
+            position: absolute;
+
+            top: 0;
+
+            right: 0;
+
+            width: 50px;
+
+            height: 60px;
+
+            line-height: 60px;
+
+            text-align: center;
+
+            transform: rotate(-90deg);
+
+        }
+
+
+
+        .burger-header .menu .mobile-menu-head {
+
+            display: flex;
+            padding:10px;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background-color: white;
+
+            /*border-bottom: 1px solid rgba(0, 0, 0, 0.5);*/
+
+            z-index: 5012;
+
+            position: sticky;
+
+            top: 0;
+
+        }
+
+
+
+        .burger-header .menu .mobile-menu-head .go-back {
+
+            width: 50px;
+
+            height: 60px;
+
+            line-height: 60px;
+
+            text-align: center;
+
+            font-size: 16px;
+
+            font-weight: 900;
+
+            border-right: 1px solid rgba(0, 0, 0, 0.3);
+
+            cursor: pointer;
+
+            display: none;
+
+        }
+
+
+
+        .burger-header .menu .mobile-menu-head.active .go-back {
+
+            display: block;
+
+        }
+
+
+
+        .burger-header .menu .mobile-menu-head .current-menu-title {
+
+            font-size: 18px;
+
+            font-weight: 900;
+
+            color: black;
+
+        }
+
+
+
+        .burger-header .menu .mobile-menu-head .mobile-menu-close {
+
+            width: 50px;
+
+            height: 60px;
+
+            line-height: 60px;
+
+            text-align: center;
+
+            font-size: 17px;
+
+            font-weight: 900;
+
+            border: 1px solid rgba(0, 0, 0, 0.3);
+
+            cursor: pointer;
+            position: absolute;
+            right: 0px;
+            top: 0;
+
+        }
+
+
+
+        .burger-header .menu .menu-main {
+
+            padding-left: 0;
+
+            height: 100%;
+
+            overflow-x: hidden;
+
+            overflow-y: auto;
+
+        }
+
+        .menu-main li a{text-decoration: none;}
+
+
+
+        .burger-header .menu>ul>li .sub-menu,
+
+        .burger-header .menu>ul>li .sub-menu.mega-menu {
+
+            opacity: 1;
+
+            visibility: visible;
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            box-shadow: none;
+
+            overflow-x: auto;
+
+            max-width: none;
+
+            min-width: auto;
+
+            padding-top: 65px;
+
+            transform: translateX(0%);
+
+            display: none;
+
+        }
+
+
+
+        .burger-header .menu>ul>li .sub-menu.active {
+
+            display: block;
+
+        }
+
+
+
+        @keyframes slideLeft {
+
+            0% {
+
+                opacity: 0;
+
+                transform: translateX(100%);
+
+            }
+
+
+
+            100% {
+
+                opacity: 1;
+
+                transform: translateX(0%);
+
+            }
+
+        }
+
+
+
+        @keyframes slideRight {
+
+            0% {
+
+                opacity: 1;
+
+                transform: translateX(0%);
+
+            }
+
+
+
+            100% {
+
+                opacity: 0;
+
+                transform: translateX(100%);
+
+            }
+
+        }
+
+
+
+        .burger-header .menu>ul>li .sub-menu.mega-menu>.list-item {
+
+            flex: 0 0 100%;
+
+        }
+
+
+
+        .burger-header .menu>ul>li .sub-menu.mega-menu>.list-item .title {
+
+            margin: 20px 0;
+
+        }
+
+
+
+        .burger-header .menu>ul>li .sub-menu.mega-menu>.list-item.text-center .title {
+
+            margin: 20px 0;
+
+        }
+
+
+
+        .burger-header .menu>ul>li .sub-menu.mega-menu>.list-item>ul>li {
+
+            line-height: 30px;
+
+        }
+
+
+
+        .burger-header .menu>ul>li .sub-menu>ul>li>a,
+
+        .burger-header .menu>ul>li .sub-menu.mega-menu>.list-item>ul>li>a {
+
+            display: block;
+
+        }
+
+
+
+        .menu-overlay {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            background-color: rgba(0, 0, 0, 0.5);
+
+            z-index: 1098;
+
+            overflow: hidden;
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition: all 0.3s ease;
+
+        }
+
+
+
+        .menu-overlay.active {
+
+            opacity: 1;
+
+            visibility: visible;
+
+        }
+
+
+
+    }
+    .burger-header {
+        position: relative;
+        width: 100%;
+        padding: 15px;
+        display: block;
+        padding-left: 0;
+    }
+    
+    .logoandmenu{
+         display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+
+    @media (min-width:1000px) {
+
+        .burger-header{display: none;}
+
+        
+
+    }
+    .center{display:flex; align-items:center; justify-content: center;}
+        .powerd-by{
+        background:#f7f4e1;
+        position: absolute;
+        width: 100%;
+        bottom: 10%;
+    }
+</style>
+
+<style type="text/css">
+    .category-nav, .subcategory-nav, .items-nav 
+    {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .category-nav, .subcategory-nav, .items-nav {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .category-item, .subcategory-item {
+        margin: 10px 0;
+    }
+
+    .category-link, .subcategory-link {
+        text-decoration: none;
+        font-size: 18px;
+        display: block;
+        padding: 5px;
+    /*    background-color: #007BFF;*/
+    /*    color: white;*/
+        border-radius: 5px;
+    }
+
+    .subcategory-nav, .items-nav {
+        display: none;
+        margin-left: 20px;
+    }
+
+    .subcategory-nav {
+        max-height: 150px; /* Adjust the height as needed */
+        overflow-y: auto;
+    }
+
+    .items-nav li {
+        margin: 5px 0;
+    }
+
+    .items-nav a {
+        text-decoration: none;
+        font-size: 16px;
+        padding: 8px;
+    /*    background-color: #6c757d;*/
+    /*    color: white;*/
+        border-radius: 5px;
+        display: block;
+    }
+</style>
+<!--burger menu end here style-->
+
+
+
+<!-- navbar start here -->
+<header>
+    <nav>
+        <section class="row top-nav-hd" style="overflow-x:hidden;">
+            <section class="col-lg-4 text-start search-sec  d-flex align-items-center">
+                <form action="product_search.php" method="POST">
+                    <article class="ps-5 width-100 d-flex">
+                        <div>
+                            <input class="form-control ps-3" placeholder="search" type="text" name="search_prod" />
+                            <input class="form-control ps-3" type="hidden" name="action" value="search" />
+                        </div>
+                        <div> 
+                            <button type="submit" class="btn btn-primary ms-3">Search</button> 
+                        </div>
+                    </article>
+                    <!--<article class="ps-5 width-100">-->
+                    <!--    <button class="form-control btn btn-secondary">Search</button>-->
+                    <!--</article>-->
+                </form>
+            </section>
+            <section class="col-lg-4 text-center  logo-hd"><article><a href="index.php"><img class="my-2 logo-img-nav" src="images/hdjjewelheader.png" ></a></article></section>
+            <section class="col-lg-4 top-sec-grid">
+                <article class="ps-5 pab">
+                    <input class="form-control ps-3 d-none none" placeholder="search" type="text" />
+                </article>
+                <article class="pe-5 pab cart-icon">
+                   <a href="user-login.php" class="text-dark"><i class="bi bi-person-fill fs-2 mx-1"></i></a>
+                  <!--<i class="bi bi-whatsapp fs-2 mx-3 text-success"></i>-->
+                 <a href="cart.php" class="text-dark">
+                    <i class="bi bi-cart-check-fill fs-2 mx-1"></i>
+                    <span id="cart-count" class="badge bg-primary rounded-pill position-absolute top-0 start-100 translate-middle cart-count" >0</span>
+                </a>
+                </article>
+              </section>
+        </section>
+    </nav>
+
+    <!-- new burger menu -->
+    <section class="burger-main" style="width:100%;">
+        <div class="burger-header pb-0">
+            <div class="container2">
+                <div class="row2 v-center">
+
+                    <div class="header-item logoandmenu item-left" >
+                        <div class="mobile-menu-trigger">
+                            <span></span>
+                        </div>
+                        <div class="logo"><a href="index.php"><img src="images/hdjjewelheader.png" alt=""  style=" width:50px; height:50px;"></a></div>
+                    </div>
+
+                    <div class="header-item item-center">
+                        <div class="menu-overlay"></div>
+                        <nav class="menu" style="height:100vh;">
+                            <div class=" powerd-by p-3 ">
+                                <div class="d-flex align-items-center justify-content-around fw-bold">
+                                    <div class="mx-2">POWERD BY</div>
+                                    <div class="mx-2"><a href=""><img width="130" src="images/technocraftsolutions-logo.png" /></a></div>
+                                </div>
+                            </div>
+                            
+                            <!--agar header chahiye rahega to usko comment se hata dena-->
+                            <!--<div class="mobile-menu-head">-->
+
+                            <!--    <div class="go-back"><i class="fas fa-angle-left"></i></div>-->
+
+                            <!--    <div class="current-menu-title"></div>-->
+
+                            <!--    <div class="mobile-menu-close">&times;</div>-->
+
+                            <!--</div>-->
+                            
+                            <div class="mobile-menu-head" style="background:#f7f4e1;">
+                                <div>
+                                    <div class="text-center">
+                                        <img src="images/hdjjewelheader.png" width="130" />
+                                    </div>
+                                    <p class="py-1">HDJ JEWEL PRIVATE LIMITED</p>
+                                </div>
+                                
+                                <div class="go-back"><i class="fas fa-angle-left"></i></div>
+
+                                <div class="current-menu-title"></div>
+
+                                <div class="mobile-menu-close">&times;</div>
+                            </div>
+                            
+                            <ul class="menu-main">
+                                <?php
+                                    if(isset($_SESSION['userid']))
+                                    {
+                                        echo '<li><a class="nav-link" href="myprofile.php">Welcome '.$_SESSION['user_name'].'</a></li>';
+                                    }
+                                ?>
+
+                                <?php
+                                if(!empty($custom))
+                                { ?>
+                                    <ul class="category-nav">
+                                        <li class="category-item">
+                                            <a class="category-link" href="#" data-category="cat1">Category</a>
+                                            <ul class="subcategory-nav" id="cat1">
+                                                <?=$category;?>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <?php
+                                }
+                                ?>
+                                
+
+                                <!-- <li><a class="nav-link" href=""><?=$url?></a></li> -->
+                                <li><a class="nav-link" href="costom-product.php">Catalogue</a></li>
+                                <li><a class="nav-link" href="product.php">Ready Stock</a></li>
+                                <li><a class="nav-link" href="trackorder.php">Track Order</a></li>
+                                <li><a class="nav-link" href="about.php">About</a></li>
+                                <li><a class="nav-link" href="contactus.php">Contact Us</a></li>
+                                <li><a class="nav-link" href="myprofile.php">profile</a></li>
+                                <!-- <li><a class="nav-link" href="myprofile.php">Category</a></li> -->
+                                <!--<li class="menu-item-has-children">-->
+                                <!--    <a href="#">Gallery <i class="fas fa-angle-down"></i></a>-->
+
+                                <!--    <div class="sub-menu mega-menu mega-menu-column-4">-->
+
+                                       
+
+                                <!--    </div>-->
+
+                                <!--</li>-->
+
+                                <!--<li class="menu-item-has-children">-->
+
+                                <!--    <a href="#">hunainn <i class="fas fa-angle-down"></i></a>-->
+
+                                <!--    <div class="sub-menu mega-menu mega-menu-column-4">-->
+
+                                       
+
+                                <!--    </div>-->
+
+                                <!--</li>-->
+
+                                <!--<li>-->
+
+                                <!--   <a class="nav-link" href="cart.php">View Cart</a>-->
+
+                                <!--</li>-->
+
+                                 
+
+                                <!--<li>-->
+
+                                <!--    <a class="nav-link" href="order-history.php">Order History</a>-->
+
+                                <!--</li>-->
+
+                                
+                            </ul>
+                            
+
+
+                        </nav>
+
+                    </div>
+
+                    <!--<div class="header-item item-right">-->
+
+                    <!--    <div class="mobile-menu-trigger">-->
+
+                    <!--        <span></span>-->
+
+                    <!--    </div>-->
+
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- new burger menu -->
+
+    <!-- new menu -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse collapse1" id="navbarText" style="display: flex; align-items: center; justify-content: center; ">
+            <ul class="navbar-nav mr-auto position-relative">
+                <li class="nav-item">
+                    <a class="nav-link" href="costom-product.php">Catalogue</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="product.php">Ready Stock</a>
+                </li>
+
+                <!-- <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="category.php">Category</a>
+                        <ul class="submenu">
+                            <li class="sub-nav-item">
+                                <a class="sub-nav-link" href="subcategory1.php">Subcategory 1</a>
+                            </li>
+                            <li class="sub-nav-item">
+                                <a class="sub-nav-link" href="subcategory2.php">Subcategory 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul> -->
+
+               <!--  <li class="nav-item">
+                    <a class="nav-link" href="category.php">Category</a>
+                </li>  -->
+
+                <li class="nav-item">
+                    <a class="nav-link" href="cart.php">View Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="trackorder.php">Track Order</a>
+                </li>
+     
+                <li class="nav-item">
+                    <a class="nav-link" href="about.php">About Us</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="contactus.php">Contact Us</a>
+                </li>
+
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Profile</a>
+                        <ul class="submenu pe-0" style="width: 20%; padding: 10px 16px;">
+                            <li class="sub-nav-item">
+                                <a class="sub-nav-link" href="myprofile.php">My profile</a>
+                            </li>
+
+                            <li class="sub-nav-item">
+                                <a class="sub-nav-link" href="user-login.php">Login</a>
+                            </li>
+
+                            <li class="sub-nav-item">
+                                <a class="sub-nav-link" href="logout.php">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </ul>
+        </div>
+    </nav>
+    <!-- new menu -->
+</header>
+
+<!--burger menu js start here-->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() 
+    {
+        const menu = document.querySelector(".menu");
+        const menuMain = menu.querySelector(".menu-main");
+        const menuTrigger = document.querySelector(".mobile-menu-trigger");
+        const goBack = menu.querySelector(".go-back");
+        const closeMenu = menu.querySelector(".mobile-menu-close");
+
+            let subMenu;
+
+        menuMain.addEventListener("click", (e) => {
+            if (e.target.closest(".menu-item-has-children")) {
+                const hasChildren = e.target.closest(".menu-item-has-children");
+                showSubMenu(hasChildren);
+            }
+        });
+
+    goBack.addEventListener("click", () => {
+        hideSubMenu();
+    });
+
+    menuTrigger.addEventListener("click", () => {
+        toggleMenu();
+    });
+
+    closeMenu.addEventListener("click", () => {
+        toggleMenu();
+    });
+
+    document.querySelector(".menu-overlay").addEventListener("click", () => {
+        toggleMenu();
+    });
+
+    function toggleMenu() {
+        console.log('Toggle Menu Triggered');  // Debug log
+        menu.classList.toggle("active");
+        document.querySelector(".menu-overlay").classList.toggle("active");
+    }
+
+    function showSubMenu(hasChildren) {
+        subMenu = hasChildren.querySelector(".sub-menu");
+        subMenu.classList.add("active");
+        subMenu.style.animation = "slideLeft 0.5s ease forwards";
+        const menuTitle = hasChildren.querySelector("i").parentNode.childNodes[0].textContent;
+        menu.querySelector(".current-menu-title").innerHTML = menuTitle;
+        menu.querySelector(".mobile-menu-head").classList.add("active");
+    }
+
+    function hideSubMenu() {
+        subMenu.style.animation = "slideRight 0.5s ease forwards";
+        setTimeout(() => {
+            subMenu.classList.remove("active");
+        }, 300);
+        menu.querySelector(".current-menu-title").innerHTML = "";
+        menu.querySelector(".mobile-menu-head").classList.remove("active");
+    }
+
+    window.onresize = function () {
+        if (this.innerWidth > 1000) {  // Ensure correct spelling 'innerWidth'
+            if (menu.classList.contains("active")) {  // Correct spelling of 'contains'
+                toggleMenu();
+            }
+        }
+    }
+    });
+
+document.addEventListener('DOMContentLoaded', function() 
+{
+    const categoryLinks = document.querySelectorAll('.category-link');
+    const subcategoryLinks = document.querySelectorAll('.subcategory-link');
+
+    categoryLinks.forEach(link => 
+    {
+        link.addEventListener('click', function(event) 
+        {
+            event.preventDefault();
+
+            const category = this.getAttribute('data-category');
+            const subcategoryNav = document.getElementById(category);
+
+            if (subcategoryNav.style.display === 'block') {
+                subcategoryNav.style.display = 'none';
+            } else {
+                document.querySelectorAll('.subcategory-nav').forEach(nav => nav.style.display = 'none');
+                subcategoryNav.style.display = 'block';
+            }
+        });
+    });
+
+    subcategoryLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            const subcategory = this.getAttribute('data-subcategory');
+            const itemsNav = document.getElementById(subcategory);
+
+            if (itemsNav.style.display === 'block') {
+                itemsNav.style.display = 'none';
+            } else {
+                document.querySelectorAll('.items-nav').forEach(nav => nav.style.display = 'none');
+                itemsNav.style.display = 'block';
+            }
+        });
+    });
+});
+</script>
+
+    <!--end here-->
+
