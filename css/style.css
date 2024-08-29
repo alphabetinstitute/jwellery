@@ -141,6 +141,7 @@ a:focus {
   background: #fff;
   padding: 20px;
   border-radius: 20px;
+  z-index: 1;
 }
 .navbar-brand span {
   font-weight: bold;
@@ -271,7 +272,7 @@ a:focus {
       -ms-flex-align: center;
           align-items: center;
   position: relative;
-  padding: 90px 0 75px 0;
+  padding: 0px 0 0px 0;
 }
 
 .slider_section .row {
@@ -285,6 +286,20 @@ a:focus {
   position: unset;
 }
 
+.slider_section .detail-box {
+  text-align: left;
+}
+.carousel-caption {
+  position: absolute;
+  right: 15%;
+  top: 15%;
+  left: 5%;
+  z-index: 10;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #fff;
+  text-align: center;
+}
 .slider_section .detail-box h1 {
     font-size: 4.5rem;
     font-weight: bold;
@@ -299,6 +314,7 @@ a:focus {
 
 .slider_section .detail-box p {
     font-size: 16px;
+    color: #002c3e;
     margin-top: 20px;
     margin-bottom: 1.5rem;
 }
@@ -328,21 +344,25 @@ a:focus {
 .slider_section .carousel-indicators {
   position: unset;
   margin: 0;
-  margin-top: 45px;
+  margin-top: 25px;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: flex-start;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
 }
 
 .slider_section .carousel-indicators li {
-  background-color: #ffffff;
+  background-color: transparent;
+  border: 1px solid #f7444e;
   width: 12px;
   height: 12px;
   border-radius: 100%;
   opacity: 1;
+}
+.slider_section .carousel-indicators li:Hover {
+  background-color: #f7444e30;
 }
 
 .slider_section .carousel-indicators li.active {
@@ -1245,15 +1265,21 @@ form input[type="submit"]:focus {
 .owl-theme .owl-dots{
   margin: 0 auto;
 }
-
+.owl-carousel button.owl-dot{
+  outline: none !important;
+}
 .owl-theme .owl-dots .owl-dot span{
   width: 12px !important;
   height: 12px !important;
+  border: 1px solid #f7444e !important;
+  background: transparent !important;
 }
 .owl-theme .owl-dots .owl-dot.active span{
   background: #f7444e !important;
 }
-
+.owl-theme .owl-dots .owl-dot:hover span{
+  background: #f7444e30 !important;
+}
 .special_img{
   border: 1px solid #002C3E30;
   margin-top: 20px;
