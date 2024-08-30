@@ -1,41 +1,66 @@
   <header class="header_section">
             <div class="container-fluid">
                <nav class="navbar navbar-expand-lg custom_nav-container ">
-                  <a class="navbar-brand" href="index.html" style="width: 120px;"><img width="250" src="images/hdjjewelheader.png" alt="#" />Jwellers</a>
+                  <a class="navbar-brand" href="index.php" style="width: 120px;"><img width="250" src="images/hdjjewelheader.png" alt="#" />Jwellers</a>
                   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class=""> </span>
                   </button>
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                      <ul class="navbar-nav w-100 justify-content-between">
-                        <li class="nav-item active">
-                           <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link" href="product.html">Catalogue</a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link" href="#">Ready Stock</a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link" href="#">View Stock</a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link" href="#">Track Order</a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link" href="blog_list.html">About Us</a>
-                        </li>
+                        <?php
+                                    if(isset($_SESSION['userid']))
+                                    {
+                                        echo '<li><a class="nav-link" href="myprofile.php">Welcome '.$_SESSION['user_name'].'</a></li>';
+                                    }
+                                ?>
 
-                        <li class="nav-item">
-                           <a class="nav-link" href="contact.html">Contact</a>
-                        </li>
+                                <?php
+                                if(!empty($custom))
+                                { ?>
+                                    <ul class="category-nav">
+                                        <li class="category-item">
+                                            <a class="category-link" href="#" data-category="cat1">Category</a>
+                                            <ul class="subcategory-nav" id="cat1">
+                                                <?=$category;?>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <?php
+                                }
+                                ?>
+                                
+
+                                <!-- <li><a class="nav-link" href=""><?=$url?></a></li> -->
+                                <li><a class="nav-link" href="costom-product.php">Catalogue</a></li>
+                                <li><a class="nav-link" href="product.php">Ready Stock</a></li>
+                                <li><a class="nav-link" href="trackorder.php">Track Order</a></li>
+                                <li><a class="nav-link" href="about.php">About</a></li>
+                                <li><a class="nav-link" href="contactus.php">Contact Us</a></li>
+                                <!-- <li><a class="nav-link" href="myprofile.php">profile</a></li> -->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Profile</a>
+                                    <ul class="submenu pe-0" style="width: 20%; padding: 10px 16px;">
+                                        <li class="sub-nav-item">
+                                            <a class="sub-nav-link" href="myprofile.php">My profile</a>
+                                        </li>
+            
+                                        <li class="sub-nav-item">
+                                            <a class="sub-nav-link" href="user-login.php">Login</a>
+                                        </li>
+            
+                                        <li class="sub-nav-item">
+                                            <a class="sub-nav-link" href="logout.php">Logout</a>
+                                        </li>
+                                    </ul>
+                                </li>
                        
                         <div class="form_sub mobile_search">
-                           <form>
+                           <form action="product_search.php" method="POST">
                               <fieldset>
                                  <div class="field">
-                                    <input type="text" placeholder="Search here . . ." name="email">
-                                    <button type="submit" onclick="searchbygrmMob(1,0, 'id', 'DESC');" class="btn search-btn">
+                                    <input class="form-control ps-3" placeholder="search" type="text" name="search_prod" />
+                                    <input class="form-control ps-3" type="hidden" name="action" value="search" />
+                                    <button type="submit" type="submit" class="btn search-btn">
                                        <i class="fa-solid fa-magnifying-glass"></i>
                                     </button>
                                  </div>

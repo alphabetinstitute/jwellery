@@ -223,6 +223,7 @@ h2 {
   text-align: left;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .left-menu li img {
@@ -289,4 +290,11 @@ h2 {
 .expand {
   font-size: 18px;
   cursor: pointer;
+}
+
+
+.subCat {
+  position: absolute;
+  top: 50%;
+  right: 0;
 }
