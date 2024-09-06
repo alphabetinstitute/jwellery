@@ -274,6 +274,9 @@ $category_name = $db->select("tbl_category","1 AND status = 1");
 
 <div class="left-menu">
             <ul>
+            <?php
+                                foreach ($category_name as $key => $value) 
+                                {?>
                <li class="active" data-category="GENTS_RING">
                   <img src="images/men/mj_4.png" alt="GENTS RING">
                   <span>GENTS RING</span>
@@ -317,89 +320,7 @@ $category_name = $db->select("tbl_category","1 AND status = 1");
                
              </ul>
          </div>
-         <div class="left-menu">
-            <h3 id="Category">
-               All
-            </h3>
-            <ul>
-               <li class="subCat electronics">
-                  electronics
-               </li>
-               <li class="subCat electronics">
-                  electronics
-               </li>
-               <li class="subCat electronics">
-                  electronics
-               </li>
-
-               <li class="subCat electronics">
-                  electronics
-               </li>
-               <li class="subCat electronics">
-                  electronics
-               </li>
-               <li class="subCat electronics">
-                  electronics
-               </li>
-               <li class="subCat electronics">
-                  electronics
-               </li>
-               <li class="subCat electronics">
-                  electronics
-               </li>
-               <li class="subCat electronics">
-                  electronics
-               </li>
-               <li class="subCat electronics">
-                  electronics
-               </li>
-               <li class="subCat electronics">
-                  electronics
-               </li>
-               <li class="subCat electronics">
-                  electronics
-               </li>
-               <li class="subCat electronics">
-                  electronics
-               </li>
-               <li class="subCat electronics">
-                  electronics
-               </li>
-               <li class="subCat electronics">
-                  electronics
-               </li>
-               <li class="subCat electronics">
-                  electronics
-               </li>
-               <li class="subCat electronics">
-                  electronics
-               </li>
-               <li class="subCat electronics">
-                  electronics
-               </li>
-               <li class="subCat electronics">
-                  electronics
-               </li>
-               <li class="subCat electronics">
-                  electronics
-               </li>
-               <li class="subCat electronics">
-                  electronics
-               </li>
-
-               <li class="subCat fashion">
-                  fashion
-               </li>
-               <li class="subCat fashion">
-                  fashion
-               </li>
-               <li class="subCat fashion">
-                  fashion
-               </li>
-
-               
-             </ul>
-         </div>
+        
                             <article class="mb-2 fw-bold text-secondary">
                                 <input type="checkbox" class="form-check-input me-1 border-grey" name="" id="getcateall" checked> 
                                 <label class="" for="ALL">ALL</label>
